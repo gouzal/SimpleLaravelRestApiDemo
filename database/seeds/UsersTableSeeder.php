@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\User;
 class UsersTableSeeder extends Seeder {
 
     /**
@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder {
             'name' => 'Administrator',
             'email' => 'admin@test.com',
             'password' => $password,
+            'password' => "8e65:933d:22ee:a232:f1c1:2741:1f10:117c",
         ]);
 
         // And now let's generate a few dozen users for our app:
@@ -32,6 +33,7 @@ class UsersTableSeeder extends Seeder {
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'password' => $password,
+                'password' => $faker->ipv6,
             ]);
         }
     }
