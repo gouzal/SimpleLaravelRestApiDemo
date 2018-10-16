@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Article; 
+use App\Article;
+use App\Http\Resources\ArticleResource;
 
 class ArticleController extends Controller {
 
     public function index() {
-        return Article::all();
+//        $limit = request()->has("limit") ? request()->get("limit") : 10;
+//        $offset = request()->has("limit") ? request()->get("offset") : 0;
+//        return ArticleResource::collection(Article::limit($limit)->offset($offset)->get());
+
+        return ArticleResource::collection(Article::paginate(10));
     }
 
     public function show(Article $article) {
-        return $article;
+        return new ArticleResource($article);
+        //return response()->json(["data"=>new ArticleResource($article), "code"=>404]);
     }
 
     public function store(Request $request) {
